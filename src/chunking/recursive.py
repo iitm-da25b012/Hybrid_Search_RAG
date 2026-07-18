@@ -46,11 +46,13 @@ class RecursiveChunker:
                     metadata = document.metadata.copy()
 
                     metadata.update(
-                        {
-                            "chunk_id": chunk_id,
-                            "chunk_strategy": "recursive",
-                        }
-                    )
+                            {
+                                "chunk_id": chunk_id,
+                                "chunk_index": chunk_id,
+                                "chunk_strategy": "recursive",
+                                "character_count": len(piece),
+                            }
+                        )
 
                     chunks.append(
                         Chunk(

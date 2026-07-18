@@ -51,7 +51,9 @@ class SemanticChunker:
                 metadata.update(
                     {
                         "chunk_id": chunk_id,
+                        "chunk_index": chunk_id,
                         "chunk_strategy": "semantic",
+                        "character_count": len(current_chunk),
                     }
                 )
 
@@ -98,10 +100,11 @@ class SemanticChunker:
                     metadata.update(
                         {
                             "chunk_id": chunk_id,
+                            "chunk_index": chunk_id,
                             "chunk_strategy": "semantic",
+                            "character_count": len(current_chunk),
                         }
                     )
-
                     chunks.append(
                         Chunk(
                             chunk_id=chunk_id,
@@ -120,7 +123,9 @@ class SemanticChunker:
                 metadata.update(
                     {
                         "chunk_id": chunk_id,
+                        "chunk_index": chunk_id,
                         "chunk_strategy": "semantic",
+                        "character_count": len(current_chunk),
                     }
                 )
 

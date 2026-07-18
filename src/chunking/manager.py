@@ -75,18 +75,27 @@ class ChunkManager:
     def chunk_documents(
         self,
         documents: List,
-        output_name: str,
+        output_name: str | None = None,
     ):
         """
         Chunk documents using the configured strategy.
+
+        Parameters
+        ----------
+        documents : List
+            Documents returned from the DocumentLoader.
+
+        output_name : str | None
+            If provided, chunks will also be saved to disk.
         """
 
         chunks = self.chunker.chunk_documents(documents)
 
-        self.save_chunks(
-            chunks,
-            output_name,
-        )
+        if output_name is not None:
+            self.save_chunks(
+                chunks,
+                output_name,
+            )
 
         return chunks
 
@@ -120,3 +129,5 @@ class ChunkManager:
                 indent=4,
                 ensure_ascii=False,
             )
+
+        print(f"Saved {len(chunks)} chunks to {output_file}")

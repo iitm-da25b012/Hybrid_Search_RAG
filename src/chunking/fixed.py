@@ -78,7 +78,9 @@ class FixedChunker:
                 chunk_metadata.update(
                     {
                         "chunk_id": chunk_id,
+                        "chunk_index": chunk_id,
                         "chunk_strategy": "fixed",
+                        "character_count": len(chunk_text),
                         "start_char": start,
                         "end_char": end,
                     }

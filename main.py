@@ -1,19 +1,35 @@
 from src.ingestion.loader import DocumentLoader
-from src.chunking.fixed import FixedChunker
+from src.chunking.manager import ChunkManager
+from src.indexing.sync import SyncManager
 
-loader = DocumentLoader()
-documents = loader.load("test/Markdown.md")
 
-chunker = FixedChunker(
-    chunk_size=100,
-    overlap=20
-)
+def main():
 
-chunks = chunker.chunk_documents(documents)
+    loader = DocumentLoader()
 
-print(f"Total chunks: {len(chunks)}")
+    documents = loader.load(
+        "test/Markdown.md"
+    )
 
-for chunk in chunks:
-    print("=" * 60)
-    print(chunk.metadata)
-    print(chunk.text)
+    print(f"Loaded {len(documents)} document(s)")
+
+    manager = ChunkManager()
+
+    chunks = manager.chunk_documents(
+        documents,
+        output_name="markdown"
+    )
+
+    print(f"Generated {len(chunks)} chunks")
+
+    sync = SyncManager()
+
+    sync.index(chunks)
+
+    sync.verify()
+
+    print(sync.statistics())
+
+
+if __name__ == "__main__":
+    main()
