@@ -1,26 +1,19 @@
-from pathlib import Path
-
 from src.ingestion.loader import DocumentLoader
+from src.chunking.fixed import FixedChunker
 
 loader = DocumentLoader()
+documents = loader.load("test/Markdown.md")
 
-test_folder = Path("test")
+chunker = FixedChunker(
+    chunk_size=100,
+    overlap=20
+)
 
-for file in test_folder.iterdir():
+chunks = chunker.chunk_documents(documents)
 
-    if file.is_file():
+print(f"Total chunks: {len(chunks)}")
 
-        print("=" * 70)
-        print(f"Loading {file.name}")
-
-        documents = loader.load(file)
-
-        print(f"Documents created : {len(documents)}")
-
-        for doc in documents:
-
-            print(doc.metadata)
-
-            print(doc.text[:150])
-
-            print("-" * 40)
+for chunk in chunks:
+    print("=" * 60)
+    print(chunk.metadata)
+    print(chunk.text)

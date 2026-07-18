@@ -1,0 +1,14 @@
+strategy: fixed
+
+fixed:
+  chunk_size: 500
+  overlap: 100
+
+recursive:
+  chunk_size: 500
+  overlap: 100
+
+semantic:
+  similarity_threshold: 0.80
+  min_chunk_size: 300
+  max_chunk_size: 800

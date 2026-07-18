@@ -1,0 +1,39 @@
+project:
+  name: Hybrid Search RAG
+  version: 1.0.0
+
+embedding:
+
+  provider: sentence_transformers
+
+  model: BAAI/bge-small-en-v1.5
+
+  batch_size: 32
+
+  normalize: true
+
+vector_store:
+
+  provider: chromadb
+
+  collection_name: hybrid-search
+
+chunking:
+
+  strategy: fixed
+
+logging:
+
+  level: INFO
+
+paths:
+
+  raw: data/raw
+
+  processed: data/processed
+
+  chunks: data/chunks
+
+  embeddings: data/embeddings
+
+  evaluation: data/evaluation
